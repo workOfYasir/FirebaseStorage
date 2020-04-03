@@ -15,6 +15,17 @@
         android:layout_marginEnd="10dp"
         android:maxLength="20"
         android:maxLines="1"/>
+        <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/upload_video"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/select_video"
+        android:layout_below="@id/videoNameET"
+        android:onClick="FromGallery"
+
+        />
 
     <VideoView
         android:layout_width="match_parent"
