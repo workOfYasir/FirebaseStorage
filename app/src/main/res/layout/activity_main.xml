@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/uploadPageLinkBtn"
+        android:text="@string/open_upload_page"
+        android:onClick="openUploadPage"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/downloadPageLinkBtn"
+        android:layout_below="@id/uploadPageLinkBtn"
+        android:text="@string/open_download_page"
+        android:onClick="openDownloadPage"/>
+
+</RelativeLayout>

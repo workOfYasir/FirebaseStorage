@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FirebaseStorage</string>
+    <string name="open_upload_page">Open Upload Page</string>
+    <string name="open_download_page">Open Download Page</string>
+    <string name="enter_the_video_name_here">Enter the Video name here</string>
+    <string name="upload_video">Upload Video</string>
+</resources>
