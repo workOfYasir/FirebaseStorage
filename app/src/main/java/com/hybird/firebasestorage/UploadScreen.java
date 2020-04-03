@@ -36,10 +36,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UploadVideoScreen extends AppCompatActivity {
+public class UploadScreen extends AppCompatActivity {
     private EditText videoNameET;
     private VideoView videoToUploadIV;
-    private Button uploadVideoBtn,selectVideoBtn;
+    private Button uploadVideoBtn,select_video;
     private Uri objectUri;
     private MediaController objectMediaController;
     private StorageReference objectStorageReference;
@@ -67,8 +67,8 @@ public class UploadVideoScreen extends AppCompatActivity {
             videoNameET=findViewById(R.id.videoNameET);
             videoToUploadIV=findViewById(R.id.videoToUploadIV);
             uploadVideoBtn=findViewById(R.id.videoUploadToServer);
-            selectVideoBtn=findViewById(R.id.select_video);
-            selectVideoBtn.setOnClickListener(new View.OnClickListener() {
+            select_video=findViewById(R.id.select_video);
+            select_video.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     videoToUploadIV.setVideoURI(null);
@@ -81,7 +81,7 @@ public class UploadVideoScreen extends AppCompatActivity {
                     mp.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
                         @Override
                         public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
-                            objectMediaController = new MediaController(UploadVideoActivity.this);
+                            objectMediaController = new MediaController(UploadScreen.this);
                             objectMediaController.setAnchorView(videoToUploadIV);
                         }
                     });
@@ -131,7 +131,7 @@ public class UploadVideoScreen extends AppCompatActivity {
                 if (!videoNameET.getText().toString().isEmpty()) {
 
                     String videoFileName = videoNameET.getText().toString() + "." + getExtension(objectUri);
-                    final StorageReference finalVideoRef = objectStorageReference.child(videofileName);
+                    final StorageReference finalVideoRef = objectStorageReference.child(videoFileName);
         
                     UploadTask objectUploadTask = finalVideoRef.putFile(objectUri);
                     objectUploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -142,7 +142,7 @@ public class UploadVideoScreen extends AppCompatActivity {
 
                             }
 
-                            return finalImageRef.getDownloadUrl();
+                            return finalVideoRef.getDownloadUrl();
                         }
                     })
                             .addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -159,17 +159,17 @@ public class UploadVideoScreen extends AppCompatActivity {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
 
-                                                        Toast.makeText(UploadVideoActivity.this, "Video is Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(UploadScreen.this, "Video is Uploaded Successfully", Toast.LENGTH_SHORT).show();
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(UploadVideoActivity.this, "Fails to upload Video", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(UploadScreen.this, "Fails to upload Video", Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
                                     } else {
-                                        Toast.makeText(UploadVideoActivity.this, "Message from Firebase:" +
+                                        Toast.makeText(UploadScreen.this, "Message from Firebase:" +
                                                 task.getException(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -177,7 +177,7 @@ public class UploadVideoScreen extends AppCompatActivity {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(UploadVideoActivity.this, "Firebase Storage Response:"+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(UploadScreen.this, "Firebase Storage Response:"+ e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                 } else {
