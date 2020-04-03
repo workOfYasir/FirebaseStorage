@@ -39,7 +39,7 @@ import java.util.Map;
 public class UploadScreen extends AppCompatActivity {
     private EditText videoNameET;
     private VideoView videoToUploadIV;
-    private Button uploadVideoBtn,select_video;
+    private Button uploadVideoBtn,selectVideoBtn;
     private Uri objectUri;
     private MediaController objectMediaController;
     private StorageReference objectStorageReference;
@@ -67,14 +67,7 @@ public class UploadScreen extends AppCompatActivity {
             videoNameET=findViewById(R.id.videoNameET);
             videoToUploadIV=findViewById(R.id.videoToUploadIV);
             uploadVideoBtn=findViewById(R.id.videoUploadToServer);
-            select_video=findViewById(R.id.select_video);
-            select_video.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    videoToUploadIV.setVideoURI(null);
-                    FromGallery();
-                }
-            });
+            selectVideoBtn=findViewById(R.id.select_video);
             videoToUploadIV.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
@@ -94,22 +87,7 @@ public class UploadScreen extends AppCompatActivity {
             Toast.makeText(this, "connectXML:"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
- 
-    private void FromGallery()
-    {
-        try
-        {
-            Intent objectIntent=new Intent();
-            objectIntent.setType("video/*");
-            objectIntent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(objectIntent,123);
-        }
-        catch (Exception e)
-        {
-            Toast.makeText(this, "selectVideoFromGallery:"+
-                    e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -214,5 +192,21 @@ public class UploadScreen extends AppCompatActivity {
 
         return null;
 
+    }
+
+    public void FromGallery(View view)
+    {
+        try
+        {
+            Intent objectIntent=new Intent();
+            objectIntent.setType("video/*");
+            objectIntent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(objectIntent,123);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this, "selectVideoFromGallery:"+
+                    e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }
